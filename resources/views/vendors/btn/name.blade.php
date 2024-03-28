@@ -1,0 +1,1 @@
+ <a href="{{ route('profile_vendor',$data->id) }}">{{ $data->name }}</a>

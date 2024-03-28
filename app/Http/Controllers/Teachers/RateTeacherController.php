@@ -1,0 +1,111 @@
+<?php
+
+namespace App\Http\Controllers\Teachers;
+
+use App\Models\City;
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Models\ReviewTeacher;
+use Yajra\DataTables\DataTables;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+
+class RateTeacherController extends Controller
+{
+    public function rate_teachers(){
+     
+        return view('teachers.rate_teachers.index');
+    }
+
+    public function get_all_rate_teachers(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = ReviewTeacher::where('teacher_id',Auth::guard('teachers')->user()->id)->orderBy('id','desc');
+            return Datatables::of($data)
+
+                ->addIndexColumn()
+
+                ->addColumn('name', function ($data) {
+                    $user = User::where('id',$data->user_id)->first();
+                    return $user->name ?? "-";
+                })
+
+            
+
+                ->rawColumns(['image'])
+
+                ->make(true);
+        }
+    }
+
+    public function store_cities(Request $request){
+       
+        $request->validate([
+            'city'              => 'required',
+       
+        ]);
+
+     
+
+        $city = new City();
+        $city ->city                  = $request->city;
+
+        
+        $city -> save();
+
+   
+
+        if ($city) {
+            return response()->json([
+                'status' => true,
+                'msg' => 'تمت الاضافة بنجاح',
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'msg' => 'فشل الحفظ برجاء المحاوله مجددا',
+            ]);
+        }
+  
+    }
+
+
+    public function update_cities(Request $request){
+
+
+        $request->validate([
+            'city'              => 'required',        
+        ]);
+
+
+        $city = City::findorFail($request->id);
+
+   
+        $city->city            = $request->city;
+
+        $city->save();
+
+        if ($city) {
+            return response()->json([
+                'status' => true,
+                'msg' => 'تم التعديل بنجاح',
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'msg' => 'فشل التعديل برجاء المحاوله مجددا',
+            ]);
+        }
+    }
+
+    public function destroy_cities(Request $request){
+           
+        $city = City::find($request->id);
+        $city->delete();
+        return response()->json([
+            'status' => true,
+            'msg' => 'deleted Successfully',
+        ]);
+     
+    }
+}

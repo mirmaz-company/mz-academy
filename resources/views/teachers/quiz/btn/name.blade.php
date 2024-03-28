@@ -1,0 +1,1 @@
+ <a href="{{ route('profile_user',$data->id) }}">{{ $data->name }}</a>
