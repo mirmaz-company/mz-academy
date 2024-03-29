@@ -18,7 +18,7 @@ class CheckIp
      */
     public function handle(Request $request, Closure $next)
     {
-    
+
         $ip = $request->ip();
 
         if ($ip !== '127.0.0.1' && $ip !== '::1') {
@@ -28,7 +28,7 @@ class CheckIp
         return $next($request);
 
         return response()->view('no_access');
-       
-        
+
+
     }
 }
