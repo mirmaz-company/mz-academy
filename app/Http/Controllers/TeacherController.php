@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Validator;
 class TeacherController extends Controller
 {
     public function teachers(){
-    
+
         return view('teachers_admin.index');
     }
 
@@ -57,7 +57,7 @@ class TeacherController extends Controller
                 })
 
 
-            
+
                 ->addColumn('send_email', function ($data) {
                     return view('teachers_admin.btn.action2', compact('data'));
                 })
@@ -66,26 +66,26 @@ class TeacherController extends Controller
                 ->addColumn('courses_count', function ($data) {
                     $course = Course::where('teacher_id',$data->id)->count();
                     return '<a href="'.route('courses',$data->id).'">'. $course.'</a>';
-                   
+
                 })
 
 
                 ->addColumn('codes', function ($data) {
                     $codes = TeacherCode::where('teacher_id',$data->id)->count();
-                   
+
                     return '<a href="'.route('sections_code',$data->id).'">'. $codes.'</a>';
-                 
+
                 })
 
                 ->addColumn('ratio', function ($data) {
-           
-                   
+
+
                     return '<a href="'.route('ratio_teachers',$data->id).'">النسبة</a>';
-                 
+
                 })
 
                 ->editColumn('total_subscriptions', function ($data) {
-           
+
                     $teacher_courese = Course::where('teacher_id',$data->id)->pluck('id');
 
                     // عشان ما يحسب شركة مرماز من ضمن العدد
@@ -101,7 +101,7 @@ class TeacherController extends Controller
                     }
 
                     return $user_course_count;
-                 
+
                 })
 
 
@@ -111,8 +111,8 @@ class TeacherController extends Controller
                     }else{
                         return  '<img src="'.asset('teacher.png').'" alt="" style="width:100%">';
                     }
-                   
-                     
+
+
                   })
 
                 ->addColumn('action', function ($data) {
@@ -122,7 +122,7 @@ class TeacherController extends Controller
                     return view('teachers_admin.btn.action3', compact('data'));
                 })
 
-            
+
 
                 ->rawColumns(['image','codes','courses_count','ratio'])
 
@@ -172,11 +172,11 @@ class TeacherController extends Controller
 
             // بخزن اي دي المجلد الفرعي للفودوسايفر
             $teacher->id_folder_vdosipher =  $responsee->id;
-            
+
         }
 
         $teacher->vdociper_or_bunny = $request->vdociper_or_bunny;
-       
+
 
         $teacher->save();
 
@@ -193,31 +193,31 @@ class TeacherController extends Controller
                 'msg' => 'يوجد مشكلة',
             ]);
         }
-        
+
     }
 
 
     public function store_teachers(Request $request){
-       
+
         $request->validate([
             'name'              => 'required',
             'email' => 'required|email|unique:teachers,email',
             'password'              => 'required',
-            
+
             'ratio'              => 'required',
-       
+
         ]);
 
         DB::beginTransaction();
         try {
 
             $input = $request->all(['name','email','password','ratio','specialization']);
-                
-                
+
+
             $input['password_show'] = $input['password'];
             $input['password'] = Hash::make($input['password']);
             // $input['study_id'] = $request->study_id;
-            
+
             $teacher = Teacher::create($input);
             $teacher->assignRole($request->input('roles_name'));
 
@@ -229,9 +229,9 @@ class TeacherController extends Controller
             $teacher_study->subject_id = $request->subject_id;
             $teacher_study->save();
 
-    
+
             // $teacher->assignRole($request->input('super_admin_teacher'));
-            
+
 
             // ضفتو في جدول اليوزر عشان لما يضيف تعليق من اللوحة..اضيفو بناءا على هذا الحساب
             $teacher_user = new User();
@@ -246,7 +246,7 @@ class TeacherController extends Controller
 
             // بدي انشئ مكتبة على bunny
             // احتاج التوكن تبعت المصادقة عند انشاء المكتبة من صفحة الاعدادات ثم بضغط back وبلاقيها
-          
+
 
             $client = new \GuzzleHttp\Client();
 
@@ -259,9 +259,9 @@ class TeacherController extends Controller
                 ],
             ]);
 
-            $data = json_decode($response->getBody()); 
+            $data = json_decode($response->getBody());
 
-          
+
 
             $response2 = $client->request('GET', 'https://api.bunny.net/pullzone/'.$data->PullZoneId.'?includeCertificate=false', [
                 'headers' => [
@@ -270,7 +270,7 @@ class TeacherController extends Controller
                 ],
               ]);
 
-            $data2 = json_decode($response2->getBody()); 
+            $data2 = json_decode($response2->getBody());
 
 
 
@@ -298,13 +298,13 @@ class TeacherController extends Controller
                 "Content-Type: application/json"
             ),
             ));
-    
+
             $responsee = curl_exec($curl);
             $err = curl_error($curl);
-    
+
             curl_close($curl);
-    
-        
+
+
             $responsee = json_decode($responsee);
 
 
@@ -329,11 +329,11 @@ class TeacherController extends Controller
                 'status'        => false,
                 'message'       => 'something error',
                 'errors'       => $e,
-                
+
             ]);
 
         }
-   
+
 
         if ($teacher) {
             return response()->json([
@@ -346,14 +346,14 @@ class TeacherController extends Controller
                 'msg' => 'فشل الحفظ برجاء المحاوله مجددا',
             ]);
         }
-  
+
     }
 
 
 
     public function is_access(Request $request){
         $student = Teacher::where('id',$request->id)->first();
-        
+
 
         if($student->is_acess == 0){
             $student ->is_acess = 1;
@@ -366,7 +366,7 @@ class TeacherController extends Controller
             }
 
         }else{
-        
+
             $student ->is_acess = 0;
             $student ->save();
 
@@ -375,7 +375,7 @@ class TeacherController extends Controller
                 $studentt ->is_acess = 0;
                 $studentt ->save();
             }
-            
+
 
         }
 
@@ -383,15 +383,15 @@ class TeacherController extends Controller
             'status' => true,
             'msg' => 'تمت التغيير بنجاح',
         ]);
-        
-        
+
+
     }
 
 
     public function show_notic(Request $request){
-    
+
         $student = Teacher::where('id',$request->id)->first();
-        
+
 
         if($student->show_notic == 0){
             $student ->show_notic = 1;
@@ -404,7 +404,7 @@ class TeacherController extends Controller
             }
 
         }else{
-        
+
             $student ->show_notic = 0;
             $student ->save();
 
@@ -413,7 +413,7 @@ class TeacherController extends Controller
                 $studentt ->show_notic = 0;
                 $studentt ->save();
             }
-            
+
 
         }
 
@@ -421,8 +421,8 @@ class TeacherController extends Controller
             'status' => true,
             'msg' => 'تمت التغيير بنجاح',
         ]);
-        
-        
+
+
     }
 
 
@@ -433,23 +433,23 @@ class TeacherController extends Controller
             'name'              => 'required',
             'email' => 'required|email|unique:teachers,email,'. $request->id,
             'password'              => 'required',
-              
+
         ]);
 
 
         $teacher = Teacher::findorFail($request->id);
 
-   
+
         $teacher->name            = $request->name;
         $teacher->email           = $request->email;
         $teacher->specialization           = $request->specialization;
-     
+
         if($request->password != $teacher->password){
             $teacher->password        = bcrypt($request->password);
             $teacher->password_show   = $request->password;
         }
-     
-     
+
+
 
         $teacher->save();
 
@@ -497,12 +497,12 @@ class TeacherController extends Controller
             // هذا السعر للباقة فقط
             // العادي عبارة عن سعر الدورة
             $section_code->price_package =  $request->price_package;
-           
+
         }
 
         $section_code->number = $request->number_codes;
         $section_code->save();
-       
+
 
         for($i =0 ; $i<$request->number_codes ; $i++){
 
@@ -517,12 +517,12 @@ class TeacherController extends Controller
             }else{
                 // يعني باقة خاصة فيها عدة كورسات
                 $teacher_code->course_id  = 0;
-               
+
             }
-           
+
             $teacher_code->section_code  = $section_code->id;
 
-         
+
             $teacher_code->code =$request->teacher_id .  rand(111111111111,999999999999);
 
             if($request -> backage_private != "noraml"){
@@ -533,8 +533,8 @@ class TeacherController extends Controller
                 $data = json_encode($data);
                 $teacher_code->courses_id = $data;
             }
-            
-            
+
+
 
             $teacher_code->save();
 
@@ -553,11 +553,11 @@ class TeacherController extends Controller
                 'code'          => 404,
                 'status'        => false,
                 'message'       => 'something error',
-                
+
             ]);
 
         }
-      
+
         return response()->json([
             'status' => true,
             'msg' => 'created Successfully',
@@ -569,19 +569,19 @@ class TeacherController extends Controller
 
 
     public function get_courses(Request $request){
-    
+
 
         $courses = CourseTwo::where('teacher_id',$request->id_teacher)->where('type','private')->get();
         return response()->json([
-    
+
             'courses' => $courses,
-           
-           
+
+
         ]);
     }
 
     public function destroy_teachers(Request $request){
-           
+
         $teacher = Teacher::find($request->id);
         $teacher->delete();
 
@@ -591,12 +591,12 @@ class TeacherController extends Controller
             $cour = Course::where('id',$course)->first();
             $cour->delete();
         }
-        
+
         return response()->json([
             'status' => true,
             'msg' => 'deleted Successfully',
         ]);
-     
+
     }
 
 
@@ -651,10 +651,10 @@ class TeacherController extends Controller
 
     public function form_teacher(Request $request){
 
-      
+
         try {
             $validator = Validator::make($request->all(), [
-            
+
                 'email' => 'email',
             ]);
 
@@ -662,29 +662,29 @@ class TeacherController extends Controller
                 return response()->json([
                     'status'    => "email_error",
                     'message' => ' الايميل غير صالح',
-                
+
                 ]);
             }
 
             $validator = Validator::make($request->all(), [
-            
+
                 'phone' => 'digits_between:10,11',
             ]);
             if ($validator->fails()) {
                 return response()->json([
                     'status'    => "mobile_error",
                     'message' => 'تحقق من رقم الجوال',
-                
+
                 ]);
             }
-         
+
 
                 $is_found = FormTeacher::Where('email',$request->email)->Where('phone',$request->phone)->first();
                 if($is_found){
                     return response()->json([
                         'status'    => "is_found3",
                         'message' => ' الايميل والجوال مسوجودين مسبقا ',
-                    
+
                     ]);
                 }
 
@@ -693,7 +693,7 @@ class TeacherController extends Controller
                     return response()->json([
                         'status'    => "is_found",
                         'message' => 'الايميل موجود مسبقا ',
-                       
+
                     ]);
                 }
                 $is_found = FormTeacher::Where('phone',$request->phone)->first();
@@ -701,7 +701,7 @@ class TeacherController extends Controller
                     return response()->json([
                         'status'    => "is_found2",
                         'message' => 'الجوال موجود مسبقا ',
-                       
+
                     ]);
                 }
 
@@ -725,12 +725,12 @@ class TeacherController extends Controller
         }
 
         catch (\Exception $e) {
-        
+
             return response()->json([
                 'code'          => 404,
                 'status'        => false,
                 'message'       => 'something error',
-                
+
             ]);
 
         }
@@ -746,20 +746,20 @@ class TeacherController extends Controller
 
 
     public function generate_pdf(Request $request){
-       
+
             $form_teacher = FormTeacher::where('id',$request->id)->first();
             $pdf = PDF::loadView('form_teacher.invoice',compact('form_teacher'));
             return $pdf->download('مرماز اكاديمي.pdf');
-        
-      
+
+
     }
     public function generate_pdf_admin($id){
-       
+
             $form_teacher = FormTeacher::where('id',$id)->first();
             $pdf = PDF::loadView('form_teacher.invoice',compact('form_teacher'));
             return $pdf->download('مرماز اكاديمي.pdf');
-        
-      
+
+
     }
 
 
@@ -770,19 +770,19 @@ class TeacherController extends Controller
             'email' => $request->email,
             'password' => $teacher->password_show
         ];
-       
+
         Mail::to($request->email)->send(new \App\Mail\MyTestMail($details));
 
         $teacher = Teacher::where('email',$request->email)->first();
         $teacher->count_send_email = $teacher->count_send_email + 1;
         $teacher->save();
-       
+
         return response()->json([
             'status'    => true,
             'message' => 'تم الارسال بنجاح',
         ]);
 
-   
+
     }
 
 

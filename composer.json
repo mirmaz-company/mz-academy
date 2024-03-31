@@ -5,7 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0",
         "carlos-meneses/laravel-mpdf": "^2.1",
         "dawson/youtube": "^2.0",
         "fruitcake/laravel-cors": "^2.0",
@@ -23,6 +23,7 @@
         "mcamara/laravel-localization": "^1.7",
         "pion/laravel-chunk-upload": "^1.5",
         "pusher/pusher-php-server": "^7.2",
+        "sentry/sentry-laravel": "^3.8",
         "spatie/laravel-newsletter": "^4.11",
         "spatie/laravel-permission": "^5.5",
         "spatie/laravel-responsecache": "^7.4",
@@ -77,7 +78,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
