@@ -16,16 +16,16 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware'=>['auth','
 
 
     Route::get('/sendNewsletter',               'UserController@sendNewsletter')->name('sendNewsletter');
-    
+
     Route::get('/my_test_email',               'UserController@my_test_email')->name('my_test_email');
-    
+
     Route::post('/send_mail',                    'TeacherController@send_mail')->name('send_mail');
 
-    
+
     // users
     Route::get('/main_statistic',               'UserController@main_statistic')->name('main_statistic');
     Route::get('/users/{type?}',                'UserController@users')->name('users');
-  
+
 
     Route::get('/get_all_users/{type?}',        'UserController@get_all_users')->name('get_all_users');
     Route::get('/users_all',        'UserController@users_all')->name('users_all');
@@ -108,26 +108,26 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware'=>['auth','
     Route::post('/decline_this_course',                   'CourseAcceptController@decline_this_course')->name('decline_this_course');
 
 
-   
+
 
 
     Route::get('/show_password/{ip}',                'UserController@show_password')->name('show_password');
     Route::get('/show_password_loading/{ip}',                'UserController@show_password_loading')->name('show_password_loading');
     Route::post('/show_password_sure',           'UserController@show_password_sure')->name('show_password_sure');
-    
+
     Route::get('/setting_dashboard',            'SettingController@setting_dashboard')->name('setting_dashboard')->middleware(['permission:الاعدادات']);
     Route::post('/dashboardsetting2',           'SettingController@dashboardsetting2')->name('dashboardsetting2');
 
 
-    
+
 
     Route::get('/get_all_role',                   'PermissionController@get_all_role')->name('get_all_role');
-    
+
     Route::get('/export/{id}',                         'UserController@export')->name('export');
     Route::get('/export_course_paid_public/{id}',      'UserController@export_course_paid_public')->name('export_course_paid_public');
-    
-    
-    
+
+
+
     Route::resource('roles', 'RoleController')->middleware(['permission:الصلاحيات']);
     Route::post('/update_rolee',                   'RoleController@update_rolee')->name('update_rolee');
     Route::get('/download-backup',          'RoleController@downloadBackup')->name('download-backup');
@@ -140,7 +140,7 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware'=>['auth','
     Route::post('/update_admins',                 'AdminController@update_admins')->name('update_admins');
     Route::post('/destroy_admins',                'AdminController@destroy_admins')->name('destroy_admins');
 
-    
+
     // admins
     Route::get('/slider_views/{id}',                         'SliderViewsController@slider_views')->name('slider_views');
     Route::get('/get_all_slider_views/{id}',                 'SliderViewsController@get_all_slider_views')->name('get_all_slider_views');
@@ -178,7 +178,7 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware'=>['auth','
     // support
     Route::get('/support',                         'SupportController@support')->name('support')->middleware(['permission:الدعم']);
     Route::get('/get_all_support',                 'SupportController@get_all_support')->name('get_all_support');
-    
+
 
 
     // cities
@@ -245,7 +245,7 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware'=>['auth','
     Route::post('/delivery_price_card',            'DeliveryCardController@delivery_price_card')->name('delivery_price_card');
     Route::post('/done_price_card',                'DeliveryCardController@done_price_card')->name('done_price_card');
 
-    
+
     // purchasescard
     Route::get('/purchasescard',                         'PurchasesCardController@purchasescard')->name('purchasescard');
     Route::get('/get_all_purchasescard',                 'PurchasesCardController@get_all_purchasescard')->name('get_all_purchasescard');
@@ -315,7 +315,7 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware'=>['auth','
 
 
 
-  
+
 
 
     // languages
@@ -363,8 +363,8 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware'=>['auth','
     // all_code
     Route::get('/all_code/{id}/{course_id}/{teacher_id}',                         'SectionCodeController@all_code')->name('all_code');
     Route::get('/get_all_all_code/{id}/{course_id}/{teacher_id}',                 'SectionCodeController@get_all_all_code')->name('get_all_all_code');
-    
-    
+
+
     // code_used
     Route::get('/code_used/{id}/{course_id}/{teacher_id}',                         'SectionCodeController@code_used')->name('code_used');
     Route::get('/get_all_code_used/{id}/{course_id}/{teacher_id}',                 'SectionCodeController@get_all_code_used')->name('get_all_code_used');
@@ -397,7 +397,7 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware'=>['auth','
 
 
 
-  
+
 
 
     // topics
@@ -406,7 +406,7 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware'=>['auth','
     Route::post('/store_topics',                  'TopicController@store_topics')->name('store_topics');
     Route::post('/update_topics',                 'TopicController@update_topics')->name('update_topics');
     Route::post('/destroy_topics',                'TopicController@destroy_topics')->name('destroy_topics');
-  
+
 
 
     // levels
@@ -438,18 +438,18 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware'=>['auth','
     Route::get('/get_levels_from_study/{id}',       'TeacherController@get_levels_from_study')->name('get_levels_from_study');
     Route::get('/get_sujects_from_level/{id}',      'TeacherController@get_sujects_from_level')->name('get_sujects_from_level');
     Route::post('/add_new_subject_to_teacher',      'TeacherController@add_new_subject_to_teacher')->name('add_new_subject_to_teacher');
- 
-    
+
+
     Route::post('/create_codes',                'TeacherController@create_codes')->name('create_codes');
 
     Route::get('/get_courses',                  'TeacherController@get_courses')->name('get_courses');
 
     // coupon_used
-    Route::get('/coupon_used',                         'CouponUsedController@coupon_used')->name('coupon_used');
-    Route::get('/get_all_coupon_used',                 'CouponUsedController@get_all_coupon_used')->name('get_all_coupon_used');
-    Route::post('/store_coupon_used',                  'CouponUsedController@store_coupon_used')->name('store_coupon_used');
-    Route::post('/update_coupon_used',                 'CouponUsedController@update_coupon_used')->name('update_coupon_used');
-    Route::post('/destroy_coupon_used',                'CouponUsedController@destroy_coupon_used')->name('destroy_coupon_used');
+    // Route::get('/coupon_used',                         'CouponUsedController@coupon_used')->name('coupon_used');
+    // Route::get('/get_all_coupon_used',                 'CouponUsedController@get_all_coupon_used')->name('get_all_coupon_used');
+    // Route::post('/store_coupon_used',                  'CouponUsedController@store_coupon_used')->name('store_coupon_used');
+    // Route::post('/update_coupon_used',                 'CouponUsedController@update_coupon_used')->name('update_coupon_used');
+    // Route::post('/destroy_coupon_used',                'CouponUsedController@destroy_coupon_used')->name('destroy_coupon_used');
 
 
     // copouns
@@ -459,10 +459,10 @@ Route::group(['prefix'=>LaravelLocalization::setLocale(),'middleware'=>['auth','
     Route::get('/export_coupon/{id}',             'CouponController@export_coupon')->name('export_coupon');
     Route::post('/update_coupon',                 'CouponController@update_coupon')->name('update_coupon');
     Route::post('/destroy_coupon',                'CouponController@destroy_coupon')->name('destroy_coupon');
-    
-    
-    
- 
+
+
+
+
 
 
 
