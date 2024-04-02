@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for laravel-new on 2024-03-30T23:43:48+02:00
+# fly.toml app configuration file generated for mirmaz-academy on 2024-04-02T13:49:38+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'laravel-new'
+app = 'mirmaz-academy'
 primary_region = 'ams'
 console_command = 'php /var/www/html/artisan tinker'
 
@@ -14,18 +14,18 @@ console_command = 'php /var/www/html/artisan tinker'
 
 [env]
   APP_ENV = 'production'
+  APP_KEY = 'base64:OvHpwsDDNQNVC2kFePHqHlemte0/4MsyIme8KaOFON8='
+  DB_CONNECTION = 'mysql'
+  DB_DATABASE = 'academy'
+  DB_HOST = '92.205.6.180'
+  DB_PASSWORD = 'yiM3pzQNMF8Y'
+  DB_PORT = '3306'
+  DB_USERNAME = 'academyawni'
   LOG_CHANNEL = 'stderr'
   LOG_LEVEL = 'info'
   LOG_STDERR_FORMATTER = 'Monolog\Formatter\JsonFormatter'
   SESSION_DRIVER = 'cookie'
   SESSION_SECURE_COOKIE = 'true'
-  DB_CONNECTION = 'mysql'
-  DB_HOST = '92.205.6.180'
-  DB_PORT = '3306'
-  DB_DATABASE = 'academy'
-  DB_USERNAME = 'academyawni'
-  DB_PASSWORD = 'yiM3pzQNMF8Y'
-
 
 [http_service]
   internal_port = 8080
@@ -36,4 +36,4 @@ console_command = 'php /var/www/html/artisan tinker'
   processes = ['app']
 
 [[vm]]
-  size = 'shared-cpu-2x'
+  size = 'shared-cpu-4x'
