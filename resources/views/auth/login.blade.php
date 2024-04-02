@@ -98,7 +98,7 @@
                                 {{-- <h3 style="font-family: 'Cairo', sans-serif" align="center" > تسجيل الدخول كمسؤول </h3> --}}
                                 <h3 style="font-family: 'Cairo', sans-serif" align="center" > تسجيل الدخول  </h3>
                             @endif</h2>
-                           
+
                             <form class="auth-login-form mt-2" action="{{ route('login') }}" method="POST">
                                 @csrf
                                 <input type="hidden" value="{{$type}}" name="type">
@@ -111,8 +111,8 @@
                                         </ul>
                                     </div>
                                 @enderror
-                                   
-                                
+
+
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
