@@ -4,6 +4,12 @@ FROM php:8.2-fpm
 # Set working directory
 WORKDIR /var/www
 
+# Set correct permissions
+RUN chown -R www-data:www-data /var/www
+
+# Create necessary directories
+RUN mkdir -p /var/www/vendor
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
