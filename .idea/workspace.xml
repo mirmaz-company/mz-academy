@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd1baee2-411e-415f-8d63-b389412217d5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -413,7 +413,7 @@
     &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/var/www/html/mz-academy&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/var/www/html/mirmaz-academy-backend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -458,7 +458,13 @@
       <workItem from="1719011604325" duration="1676000" />
       <workItem from="1719071163265" duration="4065000" />
       <workItem from="1719080068842" duration="536000" />
-      <workItem from="1719080920464" duration="984000" />
+      <workItem from="1719080920464" duration="4519000" />
+      <workItem from="1719097879207" duration="31000" />
+      <workItem from="1719427652061" duration="5568000" />
+      <workItem from="1719483319055" duration="57000" />
+      <workItem from="1719500185404" duration="5522000" />
+      <workItem from="1719506211700" duration="1850000" />
+      <workItem from="1719590303139" duration="21000" />
     </task>
     <servers />
   </component>

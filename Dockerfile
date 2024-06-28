@@ -39,3 +39,5 @@ VOLUME /var/www/app
 RUN chmod -R 755 /usr/local/bin/docker-entrypoint.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
+
+EXPOSE 80
