@@ -18,4 +18,5 @@ laravel-app/.fleet
 laravel-app/.idea
 laravel-app/.vscode
 .idea
+.idea/*
 .vscode
