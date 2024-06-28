@@ -84,6 +84,7 @@ services:
 #            - ${MP_VOLUME_LOCAL:-./storage/mail-data}:/data
 #        networks:
 #            - lara11-beta
+
 networks:
     lara11-beta:
         driver: bridge
