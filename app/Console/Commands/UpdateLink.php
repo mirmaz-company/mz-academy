@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Http;
 
 class UpdateLink extends Command
 {
-  
+
     protected $signature = 'update:link';
 
 
     protected $description = 'updated link.';
 
-   
+
     public function __construct()
     {
         parent::__construct();
@@ -31,11 +31,11 @@ class UpdateLink extends Command
 
     public function handle()
     {
-        
-          
+
+
 
     //    اي درس تلقائي بكون صفر
-    // الدرس اذا كان 
+    // الدرس اذا كان
 
         // $lessons = Lesson::where('resulotion_update',1)->get();
 
@@ -43,13 +43,13 @@ class UpdateLink extends Command
         //         foreach($lessons as $lesson){
         //             $url = 'https://hls-video.fly.dev/api/getVideo?id='.$lesson->video_id;
         //             $key = '56c16dcc-391c-444f-9482-9be00204f097';
-            
+
         //             $response = Http::withHeaders([
         //                 'key' => $key,
         //             ])->get($url);
 
         //             $responseData = $response->json(); // Decode the JSON response
-            
+
         //             if (isset($responseData['video']['status']) && $responseData['video']['status'] == 'success') {
         //                 $lesson->resulotion_update = 2;
         //                 $lesson->status_node = 1;
@@ -65,8 +65,8 @@ class UpdateLink extends Command
         //             }
         //         }
         //     }
-        
-  
+
+
     try {
         $lessons = Lesson::where('resulotion_update', 1)->get();
 
@@ -74,8 +74,8 @@ class UpdateLink extends Command
             foreach ($lessons as $lesson) {
                 $url = 'https://hls-video.fly.dev/api/getVideo?id=' . $lesson->video_id;
                 $key = '56c16dcc-391c-444f-9482-9be00204f097';
-                
-              
+
+
                 $response = Http::withHeaders([
                     'key' => $key,
                 ])->get($url);

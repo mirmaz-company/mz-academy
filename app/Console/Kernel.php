@@ -15,8 +15,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('lesson:publish')
-        ->everyMinute();
+        $schedule->command('app:task-test')->everyMinute();
+        $schedule->command('update:link')->everyMinute();
+        $schedule->command('lesson:publish')->everyMinute();
+        $schedule->command('video:length')->everyFiveMinutes();
     }
 
     /**
